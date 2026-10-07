@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ذهن — مجله مقالات</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#fefefe;--bg-soft:#f7f9fc;--paper:#fff;--text:#1a1a2e;--text-soft:#6b7280;--border:#eef0f4;--shadow:0 4px 20px rgba(0,0,0,.06);--shadow-hover:0 8px 30px rgba(0,0,0,.12);--primary:#ff6b6b;--secondary:#4ecdc4;--cat-1:#ff6b6b;--cat-2:#4ecdc4;--cat-3:#a78bfa;--cat-4:#fbbf24;--cat-5:#60a5fa;--radius:16px;--radius-sm:10px}
+html,body{height:100%;font-family:'Vazirmatn',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;direction:rtl}
+body{display:flex;flex-direction:column;min-height:100vh}
+a{color:inherit;text-decoration:none}
+header{background:var(--paper);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;padding:.8rem 1.2rem}
+.header-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.logo{font-size:1.4rem;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--cat-3),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+nav{display:flex;gap:1rem;flex-wrap:wrap}
+nav a{padding:.4rem .8rem;border-radius:var(--radius-sm);font-weight:500;font-size:.95rem;transition:all .2s;color:var(--text-soft)}
+nav a:hover{background:var(--bg-soft);color:var(--primary)}
+main{flex:1;max-width:1100px;margin:0 auto;padding:1.5rem 1.2rem 3rem;width:100%}
+.page-title{font-size:1.8rem;font-weight:800;margin-bottom:1.5rem;position:relative;padding-right:.8rem}
+.page-title::before{content:'';position:absolute;right:0;top:50%;transform:translateY(-50%);width:5px;height:70%;background:linear-gradient(180deg,var(--primary),var(--cat-3));border-radius:3px}
+.articles-grid{display:grid;grid-template-columns:1fr;gap:1.2rem}
+@media(min-width:700px){.articles-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.articles-grid{grid-template-columns:repeat(3,1fr)}}
+.article-card{background:var(--paper);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:all .3s;display:flex;flex-direction:column;border:1px solid var(--border)}
+.article-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+.article-card-image{height:160px;background:linear-gradient(135deg,var(--cat-1),var(--cat-3));position:relative;overflow:hidden}
+.article-card-image.cat-2{background:linear-gradient(135deg,var(--cat-2),var(--cat-5))}
+.article-card-image.cat-3{background:linear-gradient(135deg,var(--cat-3),var(--primary))}
+.article-card-image.cat-4{background:linear-gradient(135deg,var(--cat-4),var(--primary))}
+.article-card-image.cat-5{background:linear-gradient(135deg,var(--cat-5),var(--cat-2))}
+.article-card-image::after{content:attr(data-emoji);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3.5rem;filter:drop-shadow(0 4px 8px rgba(0,0,0,.2))}
+.article-card-body{padding:1rem 1.1rem 1.2rem;display:flex;flex-direction:column;flex:1}
+.article-card-cat{display:inline-block;font-size:.75rem;font-weight:700;padding:.2rem .6rem;border-radius:6px;margin-bottom:.6rem;align-self:flex-start;background:var(--cat-1);color:#fff}
+.article-card-cat.cat-2{background:var(--cat-2)}
+.article-card-cat.cat-3{background:var(--cat-3)}
+.article-card-cat.cat-4{background:var(--cat-4)}
+.article-card-cat.cat-5{background:var(--cat-5)}
+.article-card-title{font-size:1.05rem;font-weight:700;margin-bottom:.5rem;line-height:1.6}
+.article-card-excerpt{font-size:.88rem;color:var(--text-soft);line-height:1.8;flex:1;margin-bottom:.8rem}
+.article-card-meta{display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:var(--text-soft);border-top:1px solid var(--border);padding-top:.7rem}
+.read-more{color:var(--primary);font-weight:700}
+.category-filter{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.cat-filter{padding:.45rem .9rem;border-radius:20px;border:1.5px solid var(--border);background:var(--paper);font-family:inherit;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s;color:var(--text-soft)}
+.cat-filter:hover{border-color:var(--primary);color:var(--primary)}
+.cat-filter.active{background:linear-gradient(135deg,var(--primary),var(--cat-3));color:#fff;border-color:transparent}
+.article-full{background:var(--paper);border-radius:var(--radius);padding:1.5rem 1.3rem 2rem;box-shadow:var(--shadow);border:1px solid var(--border)}
+.article-full-header{margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:2px dashed var(--border)}
+.article-full-title{font-size:1.6rem;font-weight:800;margin-bottom:.8rem;line-height:1.5}
+.article-full-meta{display:flex;gap:1rem;flex-wrap:wrap;font-size:.85rem;color:var(--text-soft)}
+.article-content{font-size:1rem;line-height:2}
+.article-content p{margin-bottom:1.1rem}
+.article-content h2{font-size:1.3rem;font-weight:800;margin:1.8rem 0 .8rem}
+.article-content blockquote{border-right:4px solid var(--primary);background:var(--bg-soft);padding:.8rem 1rem;margin:1rem 0;border-radius:var(--radius-sm);font-style:italic;color:var(--text-soft)}
+.btn{display:inline-block;padding:.6rem 1.2rem;border-radius:var(--radius-sm);font-weight:700;font-size:.9rem;border:none;cursor:pointer;transition:all .2s;font-family:inherit}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:#ff5252;transform:translateY(-2px)}
+footer{background:var(--paper);border-top:1px solid var(--border);padding:1.5rem 1.2rem;text-align:center;font-size:.85rem;color:var(--text-soft)}
+footer .heart{color:var(--primary)}
+.empty{text-align:center;padding:3rem 1rem;color:var(--text-soft);font-size:1rem}
+.view{display:none}.view.active{display:block}
+</style>
+</head>
+<body>
+<header>
+<div class="header-inner">
+<a href="#" class="logo" onclick="showHome();return false;">ذهن ✦</a>
+<nav>
+<a href="#" onclick="showHome();return false;">خانه</a>
+<a href="#" onclick="showAbout();return false;">درباره ما</a>
+</nav>
+</div>
+</header>
+<main>
+<div id="view-home" class="view active">
+<h1 class="page-title">آخرین مقالات</h1>
+<div id="category-filter" class="category-filter"></div>
+<div id="articles-list" class="articles-grid"></div>
+</div>
+<div id="view-article" class="view">
+<div id="article-content"></div>
+<div id="related-articles"></div>
+</div>
+<div id="view-about" class="view">
+<div class="article-full">
+<div class="article-full-header"><h1 class="article-full-title">درباره ذهن ✦</h1></div>
+<div class="article-content">
+<p>ذهن یک مجله اینترنتی است که با هدف انتشار مقالات مفید و کاربردی در حوزه‌های تکنولوژی، سلامت، سفر، آشپزی و روانشناسی راه‌اندازی شده است.</p>
+<h2>هدف ما</h2>
+<p>ما باور داریم که خواندن یک مقاله خوب می‌تواند نگاه انسان را به زندگی تغییر دهد.</p>
+<h2>تیم ما</h2>
+<p>ذهن توسط گروهی از نویسندگان، پژوهشگران و متخصصان حوزه‌های مختلف اداره می‌شود.</p>
+<blockquote>ما می‌نویسیم تا بدانیم، و می‌خوانیم تا رشد کنیم.</blockquote>
+</div>
+<div style="margin-top:2rem;text-align:center"><a href="#" class="btn btn-primary" onclick="showHome();return false;">→ بازگشت به خانه</a></div>
+</div>
+</div>
+</main>
+<footer><p>ساخته‌شده با <span class="heart">♥</span> — ذهن ۱۴۰۴</p></footer>
+
+<script>
+const ARTICLES=[
+{id:1,slug:'future-of-ai',title:'آینده هوش مصنوعی در زندگی روزمره',category:'تکنولوژی',categoryClass:'cat-1',emoji:'🤖',date:'1404/07/15',readTime:5,author:'علیرضا دانا',excerpt:'هوش مصنوعی دیگر یک مفهوم علمی‌تخیلی نیست؛ از دستیار صوتی گوشی تا پیشنهاد فیلم در نتفلیکس، همه‌جا حاضر است.',content:`<p>هوش مصنوعی در چند سال اخیر از یک موضوع دانشگاهی به بخشی جدانشدنی از زندگی روزمره ما تبدیل شده است.</p><h2>هوش مصنوعی در خانه</h2><p>دستیارهای صوتی مثل الکسا و گوگل اسیستنت حالا می‌توانند کارهای بیشتری انجام دهند.</p><h2>در پزشکی و سلامت</h2><p>پزشکان امروز از هوش مصنوعی برای تشخیص بیماری‌هایی مثل سرطان در مراحل اولیه استفاده می‌کنند.</p><blockquote>هوش مصنوعی جایگزین انسان نمی‌شود، اما انسانی که از آن استفاده می‌کند جایگزین انسانی می‌شود که استفاده نمی‌کند.</blockquote><h2>چالش‌ها و نگرانی‌ها</h2><p>با تمام مزایا، نگرانی‌هایی هم وجود دارد: حفظ حریم خصوصی، از دست رفتن شغل‌ها و سوگیری الگوریتم‌ها.</p>`},
+{id:2,slug:'smart-home',title:'خانه هوشمند: از کجا شروع کنیم؟',category:'تکنولوژی',categoryClass:'cat-1',emoji:'🏠',date:'1404/07/12',readTime:4,author:'علیرضا دانا',excerpt:'خانه هوشمند فقط برای فیلم‌های علمی‌تخیلی نیست. با چند وسیله ساده و بودجه‌ای محدود هم می‌توانید خانه‌تان را هوشمند کنید.',content:`<p>تصور اینکه با یک کلمه چراغ‌های خانه را روشن کنید، دیگر تخیلی نیست.</p><h2>قدم اول: لامپ‌های هوشمند</h2><p>ساده‌ترین و ارزان‌ترین قدم، خرید یک یا دو لامپ هوشمند است.</p><h2>قدم دوم: پریز هوشمند</h2><p>پریزهای هوشمند به شما اجازه می‌دهند هر وسیله برقی معمولی را هوشمند کنید.</p><h2>قدم سوم: دستیار صوتی</h2><p>یک اسپیکر هوشمند می‌تواند مرکز فرمان خانه شما شود.</p><blockquote>خانه هوشمند نیازی به هزینه سنگین ندارد؛ با ۵ میلیون تومان هم می‌توانید شروع کنید.</blockquote><h2>نکته امنیتی مهم</h2><p>حتماً رمز وای‌فای قوی بگذارید و دستگاه‌ها را روی شبکه مهمان جدا قرار دهید.</p>`},
+{id:3,slug:'daily-walking',title:'پیاده‌روی روزانه: معجزه‌ای که نادیده می‌گیریم',category:'سلامت',categoryClass:'cat-2',emoji:'🚶',date:'1404/07/10',readTime:3,author:'علیرضا دانا',excerpt:'فقط ۳۰ دقیقه پیاده‌روی در روز می‌تواند خطر بیماری قلبی، دیابت و افسردگی را کاهش دهد.',content:`<p>پیاده‌روی ساده‌ترین و در دسترس‌ترین ورزشی است که هر کسی می‌تواند انجام دهد.</p><h2>چه اتفاقی در بدن می‌افتد؟</h2><p>ضربان قلب بالا می‌رود، گردش خون بهتر می‌شود و اکسیژن بیشتری به مغز می‌رسد.</p><h2>مزایای اثبات‌شده</h2><p>• خطر بیماری‌های قلبی را تا ۳۰٪ کاهش می‌دهد<br>• به کنترل قند خون کمک می‌کند<br>• کیفیت خواب را بهبود می‌بخشد</p><blockquote>بهترین ورزش، ورزشی است که واقعاً انجامش بدهی.</blockquote><h2>چطور شروع کنیم؟</h2><p>با ۱۰ دقیقه در روز شروع کنید و بعد از یک هفته به ۲۰ دقیقه برسانید.</p>`},
+{id:4,slug:'sleep-quality',title:'۷ عادت برای خواب بهتر و باکیفیت‌تر',category:'سلامت',categoryClass:'cat-2',emoji:'😴',date:'1404/07/08',readTime:4,author:'علیرضا دانا',excerpt:'خواب باکیفیت یکی از پایه‌های سلامتی است اما بسیاری از ما آن را فدای کار و شبکه‌های اجتماعی می‌کنیم.',content:`<p>خواب فقط استراحت نیست؛ زمانی است که مغز اطلاعات را پردازش می‌کند و بدن بازسازی می‌شود.</p><h2>۱. ساعت ثابت</h2><p>هر روز، حتی آخر هفته‌ها، ساعت مشخصی بخوابید و بیدار شوید.</p><h2>۲. اتاق تاریک و خنک</h2><p>دمای مناسب اتاق خواب ۱۸ تا ۲۱ درجه است.</p><h2>۳. دوری از موبایل</h2><p>حداقل یک ساعت قبل خواب موبایل را کنار بگذارید.</p><h2>۴. کافئین بعد از ظهر ممنوع</h2><p>قهوه بعد از ساعت ۴ بعدازظهر می‌تواند تا شب در بدن بماند.</p><h2>۵. ورزش روزانه</h2><p>فعالیت بدنی در طول روز به خواب عمیق‌تر کمک می‌کند.</p><h2>۶. شام سبک</h2><p>حداقل ۳ ساعت قبل از خواب شام بخورید.</p><h2>۷. آیین آرام‌سازی</h2><p>قبل از خواب کتاب بخوانید یا چند دقیقه مدیتیشن کنید.</p>`},
+{id:5,slug:'travel-iran-north',title:'سفر به شمال ایران: راهنمای کامل',category:'سفر',categoryClass:'cat-3',emoji:'🌲',date:'1404/07/05',readTime:6,author:'علیرضا دانا',excerpt:'جنگل‌های هیرکانی، دریای خزر و روستاهای پلکانی؛ شمال ایران یکی از زیباترین مقاصد سفر است.',content:`<p>شمال ایران با ترکیب بی‌نظیر دریا، جنگل و کوه، مقصدی است که هر ایرانی باید تجربه کند.</p><h2>بهترین زمان سفر</h2><p>اردیبهشت و خرداد بهترین زمان است؛ هوا معتدل و طبیعت در اوج زیبایی.</p><h2>جاهای دیدنی</h2><p>• <strong>ماسوله</strong> — روستای پلکانی<br>• <strong>جنگل النگدره</strong> — نزدیک گرگان<br>• <strong>رامسر</strong> — تلفیق دریا و کوه<br>• <strong>قلعه رودخان</strong> — قلعه‌ای تاریخی در دل جنگل</p><h2>چه چیزی ببریم؟</h2><p>لباس ضدآب، کفش پیاده‌روی، پشه‌بند، ضدآفتاب و داروی شخصی.</p><blockquote>سفر به شمال بدون چتر و کفش مناسب، یعنی از دست دادن نصف زیبایی‌ها.</blockquote>`},
+{id:6,slug:'budget-travel',title:'سفر با بودجه کم: ۱۰ ترفند کاربردی',category:'سفر',categoryClass:'cat-3',emoji:'✈️',date:'1404/07/02',readTime:5,author:'علیرضا دانا',excerpt:'سفر گران نیست؛ ما هستیم که گران سفر می‌کنیم. با رعایت این ۱۰ ترفند دو برابر لذت ببرید.',content:`<p>با کمی برنامه‌ریزی می‌توان با بودجه محدود هم سفرهای به‌یادماندنی داشت.</p><h2>۱. خارج از فصل سفر کنید</h2><p>همان مقصدی که در تعطیلات دو برابر قیمت دارد، دو هفته بعد نصف قیمت است.</p><h2>۲. بلیط را زودتر بخرید</h2><p>هر چه به تاریخ سفر نزدیک‌تر، بلیط گران‌تر.</p><h2>۳. اقامتگاه اشتراکی</h2><p>هاستل یا اقامتگاه‌های محلی خیلی ارزان‌تر از هتل هستند.</p><h2>۴. غذای محلی بخورید</h2><p>رستوران‌های توریستی گران و بی‌کیفیت هستند.</p><h2>۵. حمل و نقل عمومی</h2><p>تاکسی ممنوع. اتوبوس، قطار یا مترو.</p><h2>۶. برنامه‌ریزی کنید</h2><p>با برنامه، هزینه‌های اضافی حذف می‌شوند.</p><h2>۷. با دوست سفر کنید</h2><p>هزینه اتاق، ماشین و راهنما را نصف می‌کنید.</p><h2>۸. جاذبه‌های رایگان</h2><p>پیاده‌روی در بازار محلی یا پارک، بیشتر از موزه‌های گران لذت‌بخش است.</p><h2>۹. آب همراه داشته باشید</h2><p>خرید آب در مقصد گران است.</p><h2>۱۰. محدودیت بگذار</h2><p>پول قرض کردن برای سفر، فاجعه است.</p>`},
+{id:7,slug:'easy-pasta',title:'پاستای خانگی در ۱۵ دقیقه',category:'آشپزی',categoryClass:'cat-4',emoji:'🍝',date:'1404/06/28',readTime:3,author:'علیرضا دانا',excerpt:'وقتی گرسنه‌ای و وقت نداری، این دستور پاستا نجات‌دهنده است.',content:`<p>پاستا از آن غذاهایی است که همه فکر می‌کنند سخت است، در حالی که ساده‌ترین غذاهاست.</p><h2>مواد لازم (۲ نفر)</h2><p>• ۲۰۰ گرم پاستا<br>• ۲ قاشق روغن زیتون<br>• ۳ حبه سیر خردشده<br>• ۴ گوجه رسیده<br>• نمک، فلفل، ریحان<br>• پنیر پارمزان</p><h2>دستور پخت</h2><p>۱. آب را جوش بیاورید، نمک بریزید و پاستا را اضافه کنید.<br>۲. در ماهیتابه روغن زیتون بریزید و سیر را ۳۰ ثانیه تفت دهید.<br>۳. گوجه‌ها را اضافه کنید و ۵ دقیقه بپزید.<br>۴. نمک، فلفل و ریحان اضافه کنید.<br>۵. پاستا را آبکش کنید و به ماهیتابه بیفزایید.<br>۶. اگر خشک بود، کمی از آب پاستا اضافه کنید.<br>۷. در بشقاب بکشید و پارمزان رویش بپاشید.</p><blockquote>راز یک پاستای عالی: سیر نسوزد و پاستا آلدنته بماند.</blockquote>`},
+{id:8,slug:'persian-breakfast',title:'صبحانه ایرانی: چرا بهترین صبحانه دنیاست؟',category:'آشپزی',categoryClass:'cat-4',emoji:'🍳',date:'1404/06/25',readTime:4,author:'علیرضا دانا',excerpt:'پنیر و گردو، نان سنگک تازه، چای داغ؛ صبحانه ایرانی ترکیبی است از سادگی و طعم بی‌نظیر.',content:`<p>صبحانه ایرانی یکی از کامل‌ترین صبحانه‌های دنیاست.</p><h2>چرا این ترکیب عالی است؟</h2><p>پنیر پروتئین می‌دهد، گردو چربی سالم، نان کربوهیدرات و چای آنتی‌اکسیدان.</p><h2>اجزای اصلی</h2><p>• <strong>نان سنگک یا بربری</strong> تازه<br>• <strong>پنیر لیقوان یا فتا</strong> مرغوب<br>• <strong>گردو</strong> تازه<br>• <strong>سبزی خوردن</strong> یا خیار و گوجه<br>• <strong>چای</strong> پررنگ با قند یا خرما</p><h2>چطور کامل‌تر کنیم؟</h2><p>یک تخم‌مرغ آب‌پز، پروتئین صبحانه را کامل می‌کند.</p><blockquote>صبحانه ایرانی را باید با آرامش خورد. عجله، طعم را از بین می‌برد.</blockquote>`},
+{id:9,slug:'stress-management',title:'مدیریت استرس: ۵ تکنیک سریع و مؤثر',category:'روانشناسی',categoryClass:'cat-5',emoji:'🧘',date:'1404/06/20',readTime:4,author:'علیرضا دانا',excerpt:'استرس بخشی طبیعی از زندگی است، اما وقتی مزمن شود، به بدن آسیب می‌زند.',content:`<p>استرس مکانیزم دفاعی بدن در برابر خطر است.</p><h2>۱. تنفس ۴-۷-۸</h2><p>۴ ثانیه دم، ۷ ثانیه نگه‌داشتن، ۸ ثانیه بازدم. سه بار تکرار کنید.</p><h2>۲. قانون ۵-۴-۳-۲-۱</h2><p>۵ چیزی که می‌بینی، ۴ چیزی که می‌شنوی، ۳ چیزی که لمس می‌کنی...</p><h2>۳. پیاده‌روی کوتاه</h2><p>فقط ۱۰ دقیقه بیرون رفتن می‌تواند سطح کورتیزول را کم کند.</p><h2>۴. نوشتن</h2><p>آنچه نگرانت می‌کند را روی کاغذ بیاور.</p><blockquote>استرس را نمی‌توان حذف کرد، اما می‌توان مدیریتش کرد.</blockquote><h2>۵. کمک گرفتن</h2><p>کمک گرفتن نشانه ضعف نیست، نشانه بلوغ است.</p>`},
+{id:10,slug:'digital-detox',title:'دیجیتال دیتاکس: یک هفته بدون شبکه اجتماعی',category:'روانشناسی',categoryClass:'cat-5',emoji:'📵',date:'1404/06/15',readTime:5,author:'علیرضا دانا',excerpt:'یک هفته بدون اینستاگرام، توییتر و تلگرام. تجربه شخصی من از این چالش.',content:`<p>تصمیم گرفتم یک هفته کامل از شبکه‌های اجتماعی فاصله بگیرم.</p><h2>روز اول: بی‌قراری</h2><p>دستم مدام به سمت گوشی می‌رفت.</p><h2>روز سوم: آرامش</h2><p>ذهنم آرام‌تر شد. دیگر با هر نوتیفیکیشن، تمرکزم بهم نمی‌ریخت.</p><h2>روز پنجم: زمان</h2><p>کشف کردم روزی حدود ۳ ساعت آزاد پیدا کرده‌ام.</p><h2>روز هفتم: تصمیم</h2><p>تصمیم گرفتم قواعد جدید داشته باشم:<br>• صبح‌ها یک ساعت اول بدون گوشی<br>• اعلان‌ها همه خاموش<br>• هر روز یک ساعت بدون صفحه نمایش</p><blockquote>شبکه‌های اجتماعی بد نیستند، اما استفاده بی‌برنامه از آن‌ها فاجعه است.</blockquote><h2>پیشنهاد من</h2><p>شما هم یک روز امتحان کنید. نه یک هفته، فقط یک روز.</p>`},
+{id:11,slug:'mobile-tips',title:'۵ ترفند مخفی اندروید که نمی‌دانستید',category:'تکنولوژی',categoryClass:'cat-1',emoji:'📱',date:'1404/07/20',readTime:3,author:'علیرضا دانا',excerpt:'گوشی اندروید قابلیت‌های پنهانی دارد که خیلی‌ها از آن‌ها بی‌خبرند. در این مقاله ۵ ترفند کاربردی را یاد می‌گیرید.',content:`<p>گوشی‌های اندروید پر از قابلیت‌های مخفی هستند که اکثر کاربران از آن‌ها استفاده نمی‌کنند.</p><h2>۱. اسکرین‌شات سه‌انگشتی</h2><p>در خیلی از گوشی‌ها می‌توانید با کشیدن سه انگشت روی صفحه، اسکرین‌شات بگیرید.</p><h2>۲. حالت یک‌دستی</h2><p>برای صفحه‌های بزرگ، حالت یک‌دستی را فعال کنید.</p><blockquote>یادگیری این ترفندها می‌تواند روزانه دقیقه‌ها از وقت شما را ذخیره کند.</blockquote><h2>۳. ضبط تماس</h2><p>بسیاری از گوشی‌ها قابلیت ضبط خودکار تماس‌ها را دارند.</p><h2>۴. اسکرول خودکار</h2><p>روی اسکرین‌شات می‌توانید اسکرول خودکار فعال کنید.</p><h2>۵. حالت مهمان</h2><p>می‌توانید برای مهمان‌ها یک پروفایل جداگانه بسازید.</p>`},
+{id:12,slug:'rocky-therapy',title:'راکی درمانی: چرا دیدن فیلم‌های راکی حال آدم را خوب می‌کند؟',category:'روانشناسی',categoryClass:'cat-5',emoji:'🥊',date:'1404/07/25',readTime:7,author:'علیرضا دانا',excerpt:'اصطلاح «راکی درمانی» به تأثیر روانشناختی تماشای فیلم‌های راکی اشاره دارد؛ یک مفهوم غیررسمی اما از نظر روانشناسی معتبر برای مقابله با ناامیدی و بی‌انگیزگی.',content:`<p>اصطلاح «راکی درمانی» (Rocky Therapy) در واقع به یک مفهوم روانشناختی غیررسمی اشاره دارد، نه یک روش درمانی بالینی. دیدن فیلم‌های «راکی» به دلایل متعدد روانشناختی می‌تواند تأثیر درمانی و انگیزشی قدرتمندی بر بیننده بگذارد.</p><h2>🎬 چرا دیدن فیلم‌های راکی تأثیر درمانی دارد؟</h2><h2>۱. هم‌ذات‌پنداری با قهرمان معمولی</h2><p>راکی یک «آدم معمولی» است که در زندگی تقریباً شکست خورده، اما ناگهان فرصتی برای اثبات ارزش خود پیدا می‌کند. این شخصیت با بیننده‌ای که احساس سرخوردگی و افسردگی دارد، هم‌ذات‌پنداری عمیقی ایجاد می‌کند. از منظر روانکاوی، فیلم راکی حاوی فانتزی‌هایی پیرامون قدرت، قهرمان‌پروری و رستگاری است که از تجربه‌های طبقه کارگر از ضعف و تحت ستم بودن ناشی می‌شود.</p><h2>۲. القای امید و پشتکار در برابر ناامیدی</h2><p>راکی فیلمی است که می‌کوشد تماشاگر سرخورده و افسرده را به لزوم استقامت ترغیب کند؛ پیام اصلی آن این است که باید به زندگی دل بست و در راه آن تلاش کرد، حتی اگر در نهایت برنده نشوی. این پیام دقیقاً همان چیزی است که فرد افسرده یا ناامید به آن نیاز دارد.</p><h2>۳. مدل‌سازی تاب‌آوری و مقاومت</h2><p>مهم‌ترین میراث راکی، نماد روح تسلیم‌ناپذیر انسان و امتناع از تسلیم شدن در برابر ناملایمات است. راکی نشان می‌دهد که موفقیت بیشتر توسط عزم ذهنی تعیین می‌شود تا شرایط جسمی. این پیام برای درمانگران شناختی-رفتاری (CBT) بسیار ارزشمند است، زیرا بر تغییر الگوهای فکری ناکارآمد تأکید دارد.</p><h2>۴. صحنه‌های تمرین به‌عنوان استعاره‌ای از خودسازی</h2><p>صحنه‌های معروف تمرین راکی (دویدن روی پله‌های موزه هنر فیلادلفیا، بلند کردن سنگ، مشت زدن به گوشت) استعاره‌ای بصری از رهایی از شرایط محدودکننده و رسیدن به موفقیت هستند. تماشای این صحنه‌ها می‌تواند حس خودکارآمدی و انگیزه درونی را در بیننده تقویت کند.</p><h2>۵. سخنرانی انگیزشی راکی بالبوآ</h2><p>معروف‌ترین دیالوگ این مجموعه، مستقیماً به اصول درمان شناختی مربوط می‌شود:</p><blockquote>«مهم این نیست که چقدر محکم می‌زنی. مهم این است که چقدر محکم ضربه می‌خوری و باز هم به جلو حرکت می‌کنی.»</blockquote><p>این جمله در درمان عقلانی-هیجانی-رفتاری (REBT) به‌عنوان نمونه‌ای از استقامت و تاب‌آوری ذکر شده است.</p><h2>💭 «راکی درمانی» برای خود سیلوستر استالونه</h2><p>جالب است بدانید که خود سیلوستر استالونه از مجموعه راکی به‌عنوان نوعی «درمان سینمایی» برای پردازش چالش‌های زندگی‌اش استفاده کرده است. هر فیلم از این مجموعه به موضوعی روانشناختی می‌پردازد:</p><p>• <strong>راکی ۱</strong> — داستان موفقیت از فرش به عرش<br>• <strong>راکی ۲</strong> — مقابله با شهرت ناگهانی<br>• <strong>راکی ۳</strong> — مه غرور و خودبزرگ‌بینی<br>• <strong>راکی ۴</strong> — ترس از مرگ و فناپذیری<br>• <strong>راکی ۵</strong> — پذیرش افت حرفه‌ای<br>• <strong>راکی بالبوآ</strong> — خشم سالمندی و مبارزه با فراموشی</p><h2>🎞️ فیلم‌درمانی چیست؟</h2><p>«راکی درمانی» نمونه‌ای از فیلم‌درمانی یا سینمادرمانی است؛ روشی در روانشناسی که در آن از تماشای فیلم و تحلیل داستان و شخصیت‌های آن برای کمک به رشد روانی، شناخت احساسات و حل مسائل فردی استفاده می‌شود.</p><h2>نتیجه‌گیری</h2><p>«راکی درمانی» یک مفهوم غیررسمی اما از نظر روانشناختی معتبر است. دیدن فیلم‌های راکی می‌تواند به‌عنوان یک ابزار مکمل خودیاری برای مقابله با ناامیدی، بی‌انگیزگی و احساس شکست عمل کند. با این حال، جایگزین درمان تخصصی برای اختلالات جدی روانی مانند افسردگی بالینی نیست.</p>`}
+];
+
+const CATEGORIES=[
+{name:'تکنولوژی',class:'cat-1',emoji:'💻'},
+{name:'سلامت',class:'cat-2',emoji:'💚'},
+{name:'سفر',class:'cat-3',emoji:'🌍'},
+{name:'آشپزی',class:'cat-4',emoji:'🍽️'},
+{name:'روانشناسی',class:'cat-5',emoji:'🧠'}
+];
+
+function toPersianNumber(n){const p=['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];return String(n).replace(/\d/g,d=>p[d])}
+
+function createArticleCard(a){
+return '<a href="#" class="article-card" onclick="showArticle(\''+a.slug+'\');return false;">'+
+'<div class="article-card-image '+a.categoryClass+'" data-emoji="'+(a.emoji||'📄')+'"></div>'+
+'<div class="article-card-body">'+
+'<span class="article-card-cat '+a.categoryClass+'">'+a.category+'</span>'+
+'<h3 class="article-card-title">'+a.title+'</h3>'+
+'<p class="article-card-excerpt">'+a.excerpt+'</p>'+
+'<div class="article-card-meta">'+
+'<span>📅 '+a.date+'</span>'+
+'<span class="read-more">ادامه ←</span>'+
+'</div></div></a>';
+}
+
+function renderList(id,articles){
+const el=document.getElementById(id);
+if(!el)return;
+if(!articles||articles.length===0){el.innerHTML='<div class="empty">📭 مقاله‌ای اینجا نیست</div>';return}
+el.innerHTML=articles.map(createArticleCard).join('');
+}
+
+function renderFilters(activeCat){
+const el=document.getElementById('category-filter');
+if(!el)return;
+let h='<button class="cat-filter '+(!activeCat?'active':'')+'" onclick="filterCat(\'\')">همه</button>';
+CATEGORIES.forEach(c=>{h+='<button class="cat-filter '+(activeCat===c.name?'active':'')+'" onclick="filterCat(\''+c.name+'\')">'+c.emoji+' '+c.name+'</button>'});
+el.innerHTML=h;
+}
+
+function filterCat(cat){
+const f=cat?ARTICLES.filter(a=>a.category===cat):ARTICLES;
+renderList('articles-list',f);
+renderFilters(cat);
+}
+
+function showView(id){
+document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+window.scrollTo(0,0);
+}
+
+function showHome(){
+showView('view-home');
+renderFilters('');
+renderList('articles-list',ARTICLES);
+}
+
+function showArticle(slug){
+const a=ARTICLES.find(x=>x.slug===slug);
+const box=document.getElementById('article-content');
+const rb=document.getElementById('related-articles');
+if(!a){box.innerHTML='<div class="empty">😕 مقاله پیدا نشد</div>';rb.innerHTML='';showView('view-article');return}
+document.title=a.title+' | ذهن';
+let h='<div class="article-full"><div class="article-full-header">';
+h+='<span class="article-card-cat '+a.categoryClass+'">'+a.category+'</span>';
+h+='<h1 class="article-full-title">'+a.title+'</h1>';
+h+='<div class="article-full-meta">';
+h+='<span>✍️ '+a.author+'</span>';
+h+='<span>📅 '+a.date+'</span>';
+h+='<span>⏱️ '+toPersianNumber(a.readTime)+' دقیقه مطالعه</span>';
+h+='</div></div>';
+h+='<div class="article-content">'+a.content+'</div>';
+h+='<div style="margin-top:2rem;text-align:center"><a href="#" class="btn btn-primary" onclick="showHome();return false;">→ بازگشت به خانه</a></div></div>';
+box.innerHTML=h;
+const rel=ARTICLES.filter(x=>x.category===a.category&&x.id!==a.id).slice(0,3);
+if(rel.length>0){rb.innerHTML='<h2 class="page-title" style="margin-top:2.5rem">مقالات مرتبط</h2><div class="articles-grid">'+rel.map(createArticleCard).join('')+'</div>'}else{rb.innerHTML=''}
+showView('view-article');
+}
+
+function showAbout(){showView('view-about');document.title='درباره ما | ذهن'}
+
+showHome();
+</script>
+</body>
+  </html>
